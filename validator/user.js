@@ -7,7 +7,7 @@ exports.register = validate([ //1.配置验证规则
     .notEmpty().withMessage('用户名不能为空')
     .custom(async username => {
       const user = await User.findOne({ username })
-      if (username) {
+      if (user) {
         return Promise.reject('用户名已经存在！')
       }
     }),
@@ -18,7 +18,7 @@ exports.register = validate([ //1.配置验证规则
     .bail()
     .custom(async email => {
       const user = await User.findOne({ email })
-      if (email) {
+      if (user) {
         return Promise.reject('邮箱已经存在！')
       }
     })
